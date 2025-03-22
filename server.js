@@ -1,25 +1,38 @@
-const express = require('express');
-const app = express();
-const port = 4200;
-//dummy data
-const employees = require('./employees');
-//middleware
-app.use(express.json());
-//default route
-app.get('/',(req, res)=>{
-    res.send('Employee API is running!');
-});
-//api
-app.get('/api/employees',(req, res) => {
-    try{
-        //throw new Error('error');
-        res.status(200).json(employees);
-    }catch (error){
-        console.error('Error retrieving employees data:',error);
-        res.status(500).json({message:'Internal server Error'});
-    }
-});
-app.listen(port,()=>{
-    console.log(`server is running on http://localhost:${port}`);
 
+const express = require("express");
+const { getAllPatients, getPatientsByDisease } = require("./patients");
+
+const app = express();
+const PORT = 4400;
+//route for testing api is working or not
+app.get("/", (req, res) => {
+    res.send("Welcome to the Patient API!");
+  });
+  
+
+// Route to get all patients
+app.get("/patients", (req, res) => {
+  res.json(getAllPatients());
+});
+
+// Retrieve patients based on disease using Query String (e.g., /patients/filter?disease=Cold)
+app.get("/patients/filter", (req, res) => {
+  const { disease } = req.query;
+  if (!disease) {
+    return res.status(400).json({ error: "Disease query parameter is required" });
+  }
+  const filteredPatients = getPatientsByDisease(disease);
+  res.json(filteredPatients);
+});
+
+// Retrieve patients based on disease using URL Parameter (e.g., /patients/disease/Cold)
+app.get("/patients/disease/:disease", (req, res) => {
+  const { disease } = req.params;
+  const filteredPatients = getPatientsByDisease(disease);
+  res.json(filteredPatients);
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

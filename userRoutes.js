@@ -1,0 +1,29 @@
+const express = require("express");
+const router = express.Router();
+const userController = require("../controllers/userController");
+const authController = require("../controllers/authController");
+const authenticateJWT = require("../middlewares/authMiddleware");
+
+// Public routes
+router.post("/login", authController.userLogin);
+
+// Admin routes (authentication required)
+//add user
+router.post("/user", authenticateJWT, userController.addUser);
+
+// get all user
+router.get("/users", userController.getAllUsers);
+
+//get single user
+router.get("/user/:id",  userController.getSingleUser);
+
+//update user
+router.put("/user/:id", userController.updateUser);
+
+//delete user
+router.delete("/user/:id",  userController.deleteUser);
+
+// User password change
+router.put("/change-password", authController.userChangePassword);
+
+module.exports = router;

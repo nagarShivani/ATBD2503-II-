@@ -1,5 +1,5 @@
 {
-  "name": "patientapi",
+  "name": "create-api",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2",
-    "patientapi": "file:"
+    "bcryptjs": "^3.0.2",
+    "create-api": "file:",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2"
   }
 }

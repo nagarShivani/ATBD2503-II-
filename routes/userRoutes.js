@@ -12,18 +12,18 @@ router.post("/login", authController.userLogin);
 router.post("/user", userController.addUser);
 
 // get all user
-router.get("/users", authenticateJWT, userController.getAllUsers);
+router.get("/users", userController.getAllUsers);
 
 //get single user
-router.get("/user/:id", authenticateJWT, userController.getSingleUser);
+router.get("/user/:id", userController.getSingleUser);
 
 //update user
-router.put("/user/:id", authenticateJWT, userController.updateUser);
+router.put("/user/:id", userController.updateUser);
 
 //delete user
-router.delete("/user/:id", authenticateJWT, userController.deleteUser);
+router.delete("/user/:id", userController.deleteUser);
 
 // User password change
-router.put("/change-password", authenticateJWT, authController.userChangePassword);
+router.put("/change-password", authenticateJW, authController.userChangePassword);
 
 module.exports = router;

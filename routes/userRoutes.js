@@ -24,6 +24,6 @@ router.put("/user/:id", userController.updateUser);
 router.delete("/user/:id", userController.deleteUser);
 
 // User password change
-router.put("/change-password", authenticateJW, authController.userChangePassword);
+router.put("/change-password", authenticateJWT, authController.userChangePassword);
 
 module.exports = router;
